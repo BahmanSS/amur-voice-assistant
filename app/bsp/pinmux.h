@@ -21,8 +21,8 @@
  * DFPlayer: TX0  (PORT 0.5)  - UART TX, передача команд плееру
  *           RX0  (PORT 0.6)  - UART RX, приём ответов от плеера(опционально)
  * 
- * DF2301Q:  SDA1 (PORT 1.12) - I2C SDA
- *           SCL1 (PORT 1.13) - I2C SCL
+ * DF2301Q:  TX1 (PORT 1.8) - UART TX, передача команд плееру(опционально)
+ *           RX1 (PORT 1.9) - UART RX, приём ответов от плеера
  * 
  */
 
@@ -41,7 +41,7 @@
 #define DFPLAYER_RX_PIN (5)   // D0, RX — приём ответов от плеера
 #define DFPLAYER_TX_PIN (6)   // D1, TX — передача команд плееру
 
-// ===== DF2301Q (Модуль распознвоания речи, I2C) =====
+// ===== DF2301Q (Модуль распознвоания речи, UART) =====
 #define DF2301Q_PORT GPIO_1
 #define DF2301Q_SDA_PIN (8)
 #define DF2301Q_SCL_PIN (9)

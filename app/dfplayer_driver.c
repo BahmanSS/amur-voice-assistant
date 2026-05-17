@@ -11,30 +11,12 @@ uint8_t DFPlayer_SendCmd(DFPlayer_HandleTypeDef* dfplayer, uint8_t cmd, uint16_t
     tx_buffer[4] = NO_ASK;
     tx_buffer[5] = (prm >> 8) & 0xFF;
     tx_buffer[6] = prm & 0xFF;
-    //uint16_t sum = 0;
-    // for (uint8_t i = 1; i <= 6; ++i) {
-    //     sum += tx_buffer[i];
-    // }
-    // uint16_t checksum = 0xFFFF - sum + 1;
-    // tx_buffer[7] = (checksum >> 8) & 0xFF;
-    // tx_buffer[8] = checksum & 0xFF;
     tx_buffer[7] = END_BYTE;
 
     for (uint8_t i = 0; i < 8; ++i) {
         HAL_USART_Transmit(dfplayer->huart, tx_buffer[i], USART_TIMEOUT_DEFAULT);
     }
     
-    // for (uint8_t i = 0; i < 10; ++i) {
-    //     if (HAL_USART_Receive(dfplayer->huart, &rx_buffer[i], USART_TIMEOUT_DEFAULT) != HAL_OK) {
-    //         return 1;
-    //     }
-    // }
-    // if (rx_buffer[0] != START_BYTE ||
-    //     rx_buffer[3] != cmd || 
-    //     rx_buffer[4] != 0x00 ||
-    //     rx_buffer[9] != END_BYTE) {
-    //     return 1;
-    // }
     return 0;
 }
 

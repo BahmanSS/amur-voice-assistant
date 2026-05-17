@@ -23,26 +23,19 @@ void RGBLEDType_Init()
 
 void RGBLEDType_RainbowEffect(uint32_t duration_ms)
 {
-    // Сохраняем текущий цвет
     uint8_t saved_r = current_color.r;
     uint8_t saved_g = current_color.g;
     uint8_t saved_b = current_color.b;
+    const int steps = 360 / 5;
     
-    // Количество шагов: полный круг 360° с шагом 5° = 72 шага
-    const int steps = 360 / 5;  // 72 шага
-    
-    // Время одного шага
     uint32_t step_delay = duration_ms / steps;
     
     for (int step = 0; step < steps; step++) {
-        // Угол: 0, 5, 10, ... 355 градусов
         int angle = step * 5;
         
-        // Разбиваем на 6 секторов по 60 градусов
-        int sector = angle / 60;      // 0..5
-        int pos = angle % 60;         // 0..59
+        int sector = angle / 60;
+        int pos = angle % 60;
         
-        // Яркость в секторе (0..100)
         int brightness = (pos * 100) / 60;
         int inv_brightness = 100 - brightness;
         
@@ -62,7 +55,7 @@ void RGBLEDType_RainbowEffect(uint32_t duration_ms)
             case 4:  // Синий → Пурпурный
                 RGBLEDType_SetColor(brightness, 0, 100);
                 break;
-            default: // Пурпурный → Красный (sector 5)
+            default: // Пурпурный → Красный
                 RGBLEDType_SetColor(100, 0, inv_brightness);
                 break;
         }
@@ -70,6 +63,5 @@ void RGBLEDType_RainbowEffect(uint32_t duration_ms)
         delay_ms(step_delay);
     }
     
-    // Возвращаем исходный цвет
     RGBLEDType_SetColor(saved_r, saved_g, saved_b);
 }
