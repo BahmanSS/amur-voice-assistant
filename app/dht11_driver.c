@@ -38,10 +38,6 @@ uint8_t DHT11_ReadData(DHT11_Data_TypeDef *data) {
 	}
     
 
-    uint8_t checksum = bytes[0] + bytes[1] + bytes[2] + bytes[3];
-
-    if (checksum != bytes[4]) { return 4; }
-
     data->humidity_int = bytes[0];
     data->humidity_dec = bytes[1];
     data->temperature_int = bytes[2];

@@ -36,3 +36,9 @@ void Timer_Init(void)
 {
     TimerRGB_Init();
 }
+
+void delay_ms(uint32_t ms) {
+   uint64_t end_mtimer = SCR1_TIMER_GET_TIME() + MS_TO_TICKS(ms);
+   while (SCR1_TIMER_GET_TIME() < end_mtimer)
+     ;
+}
