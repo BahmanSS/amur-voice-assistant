@@ -1,0 +1,12 @@
+[submodule "example_mik32/hardware/mik32-hal"]
+	path = example_mik32/hardware/mik32-hal
+	url = https://github.com/MikronMIK32/mik32-hal.git
+[submodule "example_mik32/hardware/mik32v2-shared"]
+	path = example_mik32/hardware/mik32v2-shared
+	url = https://github.com/MikronMIK32/mik32v2-shared.git
+[submodule "hardware/mik32-hal"]
+	path = hardware/mik32-hal
+	url = https://github.com/MikronMIK32/mik32-hal.git
+[submodule "hardware/mik32v2-shared"]
+	path = hardware/mik32v2-shared
+	url = https://github.com/MikronMIK32/mik32v2-shared.git

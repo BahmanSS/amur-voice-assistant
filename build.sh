@@ -1,0 +1,1 @@
+rm -rf build && cmake -B build --toolchain mik32_toolchain.cmake && cmake --build build
