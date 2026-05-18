@@ -11,9 +11,9 @@ uint8_t DHT11_ReadData(DHT11_Data_TypeDef *data) {
     delay_us(190000);
     DHT11_PIN_PORT->DIRECTION_IN = (1 << DHT11_PIN_NUM);
     if ((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) == 0) { return 1; }
-    delay_us(20);
+    delay_us(40); // eeprom - 40, flash - 20
     if ((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) != 0) { return 2; }
-    delay_us(50);
+    delay_us(80); // eeprom - 80, flash - 50
     if ((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) == 0) { return 3; }
 
     while ((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) != 0);
@@ -26,8 +26,7 @@ uint8_t DHT11_ReadData(DHT11_Data_TypeDef *data) {
             
 			while ((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) == 0);
             
-            
-			delay_us(7);
+			delay_us(40); // eeprom - 40, flash - 7
 			if((DHT11_PIN_PORT->STATE & (1 << DHT11_PIN_NUM)) != 0) {
                 bytes[i] = bytes[i] | (1 << (7 - j));
             }

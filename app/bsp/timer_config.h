@@ -25,6 +25,7 @@
   (((uint64_t)(SCR1_TIMER->MTIMEH) << 32) | (SCR1_TIMER->MTIME))
 
 void TimerRGB_Init(void);
+void TimerRGB_Effects_Init(void);
 void Timer_Init(void);
 
 void delay_ms(uint32_t ms);

@@ -32,9 +32,30 @@ void TimerRGB_Init(void)
     TIMER32_1->ENABLE = 1;
 }
 
+
+
+void TimerRGB_Effects_Init(void) 
+{
+    // Включение тактирования TIMER32_2
+    PM->CLK_APB_P_SET |= PM_CLOCK_APB_P_TIMER32_2_M;
+    
+    // Базовая настройка таймера
+    TIMER32_2->ENABLE = 0;
+    TIMER32_2->TOP = MS_TO_TICKS(50);
+    TIMER32_2->PRESCALER = 0;
+    TIMER32_2->CONTROL = TIMER32_CONTROL_MODE_UP_M | TIMER32_CONTROL_CLOCK_PRESCALER_M;
+    TIMER32_2->INT_MASK = TIMER32_INT_OVERFLOW_M; // Включаем прерывание по переполнению
+    TIMER32_2->INT_CLEAR = 0xFFFFFFFF;
+    
+    // Запуск таймера
+    TIMER32_2->ENABLE = 1;
+
+}
+
 void Timer_Init(void)
 {
     TimerRGB_Init();
+    TimerRGB_Effects_Init();
 }
 
 void delay_ms(uint32_t ms) {

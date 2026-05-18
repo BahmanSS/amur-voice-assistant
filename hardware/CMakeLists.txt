@@ -1,5 +1,11 @@
+# add_library(mik32_shared
+#     mik32v2-shared/runtime/crt0.S
+#     mik32v2-shared/libs/xprintf.c
+# )
+
+# Стало (startup.c)
 add_library(mik32_shared
-    mik32v2-shared/runtime/crt0.S
+    ${CMAKE_SOURCE_DIR}/app/bsp/startup.c           # ← добавить твой startup.c
     mik32v2-shared/libs/xprintf.c
 )
 
