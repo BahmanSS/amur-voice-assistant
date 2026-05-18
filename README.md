@@ -24,6 +24,20 @@
 | MOSFET модуль | AOD4184 (x3) | Управление RGB-лентой (PWM коммутация) |
 | Блок питания | AC/DC адаптер 12V | Питание RGB-ленты |
 
+## Документация
+[opisanie-elbear-ace_uno-rev.1.1-11.08.1-a3.pdf](https://github.com/user-attachments/files/27972819/opisanie-elbear-ace_uno-rev.1.1-11.08.1-a3.pdf)
+
+[MIK32_datasheet_v2.2.2.pdf](https://github.com/user-attachments/files/27972817/MIK32_datasheet_v2.2.2.pdf)
+
+[DFPlayer_mini_datasheet.pdf](https://github.com/user-attachments/files/27972816/DFPlayer_mini_datasheet.pdf)
+
+https://wiki.dfrobot.com/sen0539-en/
+
+[dht11-rus.pdf](https://github.com/user-attachments/files/27972879/dht11-rus.pdf)
+
+[AOI4184.pdf](https://github.com/user-attachments/files/27972929/AOI4184.pdf)
+
+
 
 ## 🎤 Команды голосового ассистента
 
