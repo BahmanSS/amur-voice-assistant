@@ -1,6 +1,6 @@
 #ifndef RGB_LED_TYPE
 #define RGB_LED_TYPE
-#include "bsp/timer_config.h"
+#include "../bsp/timer_config.h"
 
 #define SYSTEM_FREQ_HZ 32000000UL
 #define PWM_FREQ_HZ (1000)

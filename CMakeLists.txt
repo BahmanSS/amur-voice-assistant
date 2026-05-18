@@ -3,15 +3,19 @@ project(app_project LANGUAGES C ASM)
 
 add_executable(app 
     app/main.c
-    app/dfplayer_driver.c
-    app/rgb_led_type_driver.c
-    app/dht11_driver.c
+    # drivers
+    app/drivers/dfplayer_driver.c
+    app/drivers/rgb_led_type_driver.c
+    app/drivers/dht11_driver.c
+    app/drivers/DFRobot_DF2301Q_driver.c
+    # bsp
     app/bsp/pinmux.c
     app/bsp/timer_config.c
     app/bsp/usart.c
-    app/DFRobot_DF2301Q_driver.c
     app/bsp/riscv-irq.c
     app/bsp/startup.c
+    app/bsp/interrupt.c
+    app/bsp/clock.c
 )
 
 add_subdirectory(hardware)

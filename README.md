@@ -51,13 +51,10 @@
 
 ```bash
 # Клонирование репозитория
-git clone --recursive https://github.com/your-repo/voice-assistant.git
-cd voice-assistant
+git clone --recursive https://github.com/BahmanSS/amur-voice-assistant
+cd amur-voice-assistant
 
-# Инициализация submodule
-git submodule update --init --recursive
-
-# Сборка проекта
+# Сборка проекта и обновления submudules
 ./build.sh
 
 # Прошивка устройства

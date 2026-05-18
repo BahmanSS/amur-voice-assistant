@@ -1,7 +1,7 @@
 #ifndef DFPLAYER_MINI
 #define DFPLAYER_MINI
 
-#include "bsp/usart.h"
+#include "../bsp/usart.h"
 
 //              1        2       3      4        5       6      7       8         9        10
 // Format: START_BYTE VERSION LENGTH COMMAND FEEDBACK PARAM1 PARAM2 CHECKSUM1 CHECKSUM2 END_BYTE

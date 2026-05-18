@@ -1,16 +1,38 @@
 #include "bsp/pinmux.h"
 #include "bsp/timer_config.h"
 #include "bsp/usart.h"
-#include "bsp/riscv-irq.h"
-#include "epic.h"
+#include "bsp/interrupt.h"
+#include "bsp/clock.h"
 
-#include "dht11_driver.h"
-#include "dfplayer_driver.h"
-#include "rgb_led_type_driver.h"
-#include "DFRobot_DF2301Q_driver.h"
+#include "drivers/dht11_driver.h"
+#include "drivers/dfplayer_driver.h"
+#include "drivers/rgb_led_type_driver.h"
+#include "drivers/DFRobot_DF2301Q_driver.h"
 
 static DFPlayer_HandleTypeDef dfplayer0;
 static DHT11_Data_TypeDef dht11;
+
+void EPIC_trap_handler(void);
+void AMUR(void);
+
+int main(void)
+{
+    // Board Support Package Init
+    SystemClock_Config();
+    Pinmux_Init();
+    Timer_Init();
+    USART_Init();
+    Interrupt_Init();
+
+    // Drivers Init
+    DFPlayer_Init(&dfplayer0, &husart0);
+    delay_ms(6000);
+    RGBLEDType_Init();
+    DF2301Q_Init(&husart1);
+
+    // Main Loop
+    AMUR();
+}
 
 void EPIC_trap_handler(void)
 {
@@ -21,41 +43,7 @@ void EPIC_trap_handler(void)
     }
 }
 
-static void SystemClock_Config(void)
-{
-    PCC_InitTypeDef PCC_OscInit = {0};
-
-    PCC_OscInit.OscillatorEnable = PCC_OSCILLATORTYPE_ALL;
-    PCC_OscInit.FreqMon.OscillatorSystem = PCC_OSCILLATORTYPE_OSC32M;
-    PCC_OscInit.FreqMon.Force32KClk = PCC_FREQ_MONITOR_SOURCE_OSC32K;
-    PCC_OscInit.HSI32MCalibrationValue = 128;
-    PCC_OscInit.LSI32KCalibrationValue = 8;
-    HAL_PCC_Config(&PCC_OscInit);
-}
-
-int main(void)
-{
-    SystemClock_Config();
-    Pinmux_Init();
-    Timer_Init();
-    USART_Init();
-
-    DFPlayer_Init(&dfplayer0, &husart0);
-    delay_ms(6000);
-    RGBLEDType_Init();
-    DF2301Q_Init(&husart1);
-    
-    // 1. Включаем тактирование EPIC
-    PM->CLK_APB_M_SET |= PM_CLOCK_APB_M_EPIC_M;
-    // 2. Разрешаем прерывание от TIMER32_2 в EPIC
-    EPIC->MASK_LEVEL_SET = 1 << EPIC_LINE_TIMER32_2_S;
-    // 3. Устанавливаем обработчик прерываний
-    riscv_irq_set_handler(RISCV_IRQ_MEI, EPIC_trap_handler);
-    // 4. Включаем внешние прерывания
-    riscv_irq_enable(RISCV_IRQ_MEI);
-    // 5. Включаем глобальные прерывания
-    riscv_irq_global_enable();
-
+void AMUR(void) {
     RGBLEDType_SetMode(RGB_MODE_STATIC);
     RGBLEDType_SetColor(50, 50, 50);
 
